@@ -2,39 +2,80 @@
 <html>
 <head>
     <meta charset='utf-8' />
-    <title></title>
+    <title>#HackFosterCare</title>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
     <style>
         body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
+        #map { position:fixed; top:0; bottom:0; width:50%; }
     </style>
 </head>
 <body>
 
 <style>
-#map {
-    position: fixed;
-    width:80%;
+
+#features {
+    width: 50%;
+    margin-left: 50%;
+    font-family: sans-serif;
+    overflow-y: scroll;
+    background-color: #fafafa;
+}
+section {
+    padding:  25px 50px;
+    line-height: 25px;
+    border-bottom: 1px solid #ddd;
+    opacity: 0.25;
+    font-size: 13px;
+}
+section.active {
+    opacity: 1;
+}
+section:last-child {
+    border-bottom: none;
+    margin-bottom: 400px;
 }
 </style>
 
 <div id='map'></div>
-
+<div id='features'>
+    <section id='losangelescounty' class='active'>
+        <h2>Welcome to Los Angeles County</h2>
+        <p>Home to ten million people, with over 30,000 children in County Care and a shortage of foster parents. Over the past year, policy makers and attorneys, caseworkers and former foster youth, hackers and tech executives, banded together to attack the problems faced by child welfare systems across the nation. Our story map provides a brief tour of #HACK Foster Care events. Feel free to visit the event home pages as you travel. The Los Angeles event site includes video testimonies, code samples, and open data.</p>
+    </section>
+    <section id='washingtondc'>
+		<a href="https://www.hackfostercare.org/washington-d-c"  target="_blank"><img src="images/foster-care-month.png"></a>
+		<h3><a href="https://www.hackfostercare.org/washington-d-c"  target="_blank">WASHINGTON DC: May 26, 2016</a></h3>
+        <p>During National Foster Care Month, the White House, the U.S. Department of Health and Human Services and Think of Us hosted the first ever White House Foster Care and Technology Hackathon. The two-day long event brought together child welfare leaders, philanthropies, foster care families, policy makers, and leaders from the technology sector and discussed ways to improve our foster care system through the use of technology and highlight best practices. In attendance were local government leaders from across the nation</p>
+    </section>
+	    <section id='newyorkcity'>
+        <a href="https://www.hackfostercare.org/nyc" target="_blank" alt="Visit the event"><img src="images/new_york_city.png"></a>
+		<h3><a href="https://www.hackfostercare.org/nyc" target="_blank">NEW YORK CITY: December 3-4, 2016</a></h3>
+        <p>The next Hack Foster Care event took place in New York City's high tech community, sometimes referred to as "Silicon Alley". Leaders in NYC’s child welfare field, tech sector, government, non-profits, and other agents of change came together to "hack" NYC foster care system’s most pressing challenges with the goal of improving the lives of 9,000 children & youth along with foster parents, and social workers.</p>
+    </section>
+        <section id='siliconvalley'>
+        <a href="https://www.hackfostercare.org/silicon-valley" target="_blank" alt="Visit the event"><img src="images/silicon_valley.png"></a>
+		<h3><a href="https://www.hackfostercare.org/silicon-valley" target="_blank">SILICON VALLEY: Feb 27-28, 2017</a></h3>
+        <p>The next event was held in the world's technology headquarters. Hosted in Mountain View, the Hack Foster Care Summit brought together technology companies, government agencies, non-profits, and foster youth advocates to focus on college and career preparation for foster youth. Providing access to technology for foster youth and coordinating the sharing of information were also tackled.</p>
+    </section>
+    <section id='losangeles'>
+        <a href="https://www.hackfostercare.org/los-angeles" target="_blank" alt="Visit the event"><img src="images/los_angeles.png"></a>
+		<h3><a href="https://www.hackfostercare.org/los-angeles" target="_blank" >LOS ANGELES: April 28-29, 2017</a></h3>
+        <p>In and around Culver City and Santa Monica is the focal point of SoCal's high tech, known locally as "Silicon Beach". Los Angeles City Mayor Richard Garcetti best stated, "Today is about connecting disconnected people, and technology is the bridge that accelerates those connections."</p>
+    </section>	
+</div>
 <script>
+
 //This function create the map to load onto your web browser
 var map = L.map('map').setView([34.0622, -118.2680], 9);
 
-//This function adds a layer to the map, this layer would be added first, known as a base layer. Additional layers can be added on top.
-
-L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+//This function adds a layer to the map, this layer would be added first, known as a base layer. Additional layers can be added on top.    
+L.tileLayer('http://d.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
+    attribution: '<a target="_top" href="http://stamen.com">Stamen Design, under CC BY 3.0, data by OSM</a>'
 }).addTo(map);
 
-/*L.marker([34.056255, -118.246722]).addTo(map)
-    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-    .openPopup();*/
+//Add the Los Angeles County outline to the map:
 
 var laco = [{
 "type": "FeatureCollection",
@@ -51,25 +92,113 @@ var myStyle = {
     "color": "#000099",
     "weight": 5,
     "opacity": 0.66,
-	"fillOpacity": 0.07
+	"fillOpacity": 0.00
 };
 
 L.geoJSON(laco, {
     style: myStyle
 }).addTo(map);
 
-//to remove this layer: map.removeLayer(laco)
-	
+/*L.marker([34.056255, -118.246722]).addTo(map)
+    .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+    .openPopup();*/
+
+L.marker([38.897701, -77.036551]).addTo(map)
+    .bindPopup('Washington, DC<br><a href="https://www.whitehouse.gov" target="_blank">The White House</a>');
+
+L.marker([40.740336, -73.995191]).addTo(map)
+    .bindPopup('New York City, New York<br><a href="https://en.wikipedia.org/wiki/Silicon_Alley" target="_blank">Silicon Alley</a>');
+
+L.marker([37.416083, -122.075664]).addTo(map)
+    .bindPopup('Mountain View, California<br><a href="https://en.wikipedia.org/wiki/Silicon_Valley" target="_blank">Silicon Valley</a>');
+
+L.marker([33.979586, -118.407175]).addTo(map)
+    .bindPopup('Los Angeles, California<br><a href="https://en.wikipedia.org/wiki/Silicon_Beach" target="_blank">Silicon Beach</a>');
+
+
+
+
 //This function adds a tile layer from remote sources like the David Rumsey Map Collection, remove the "/*" at the beginning and "*/" at the end to activate.
- 
-/*L.tileLayer('http://maps.georeferencer.com/georeferences/236482959682/2017-02-20T14:25:19.132722Z/map/{z}/{x}/{y}.png?key=zfSXuPw8W8w4AymmpUlZ', {
+/*    
+L.tileLayer('http://maps.georeferencer.com/georeferences/236482959682/2017-02-20T14:25:19.132722Z/map/{z}/{x}/{y}.png?key=zfSXuPw8W8w4AymmpUlZ', {
     attribution: '&copy; <a href="http://www.davidrumsey.com/luna/">David Rumsey Map Collection</a> GW Baist Map, 1921'
-}).addTo(map);*/
+}).addTo(map);
+*/
 
-
-//Here are other tiles you can switch to, make sure you change the attribution to the source.
+//Here are other tiles you can switch, make sure you change the attribution to the source.
 //Stamen Toner-Lite | http://d.tile.stamen.com/toner-lite/{z}/{x}/{y}.png | <a target="_top" href="http://stamen.com">Stamen Design, under CC BY 3.0, data by OSM</a>
 //Stamen Watercolor | http://d.tile.stamen.com/watercolor/{z}/{x}/{y}.png | <a href="http://stamen.com">Stamen Design under CC BY 3.0, data by OSM</a>
+
+//This are the locations for your map to move along with your story
+//This is variable created an object called an JSON, you can add and remove chapters to the story. Make sure you reflect the changes in the sections with the text of your story.    
+var chapters = {
+    'losangelescounty': {
+        center: [34.0622, -118.2680],
+        zoom: 9,
+    },
+    'washingtondc': {
+        center: [38.897701, -77.036551],
+        zoom: 17,
+    },
+	'newyorkcity': {
+    center: [40.740336, -73.995191],
+    zoom: 15,
+    },
+	'siliconvalley': {
+    center: [37.416083, -122.075664],
+    zoom: 15,
+    },
+    'losangeles': {
+        center: [33.979586, -118.407175],
+        zoom: 15,
+    }
+};
+
+//Function to run the story    
+// On every scroll event, check which element is on screen
+window.onscroll = function() {
+    var chapterNames = Object.keys(chapters);
+    for (var i = 0; i < chapterNames.length; i++) {
+        var chapterName = chapterNames[i];
+        if (isElementOnScreen(chapterName)) {
+            setActiveChapter(chapterName);
+            break;
+        }
+    }
+};
+
+var activeChapterName = 'losangelescounty'; //Change this to match the first chapter of your story
+function setActiveChapter(chapterName) {
+    if (chapterName === activeChapterName) return;
+
+    map.flyTo(chapters[chapterName].center, chapters[chapterName].zoom);
+
+    document.getElementById(chapterName).setAttribute('class', 'active');
+    document.getElementById(activeChapterName).setAttribute('class', '');
+
+    activeChapterName = chapterName;
+}
+
+function isElementOnScreen(id) {
+    var element = document.getElementById(id);
+    var bounds = element.getBoundingClientRect();
+    return bounds.top < window.innerHeight && bounds.bottom > 0;
+}
+//End of function to run the story    
+    
+
+//This JS Function asks Mapbox to get the bearing/center/zoom/pitch of the mouse position when clicked.
+//To turn off this function, add a "/*" at the beginning of the function and a "*/" at the end. This will turn the function into a comment.
+map.on('click', function () {
+    // e.lngLat is the longitude, latitude geographical position of the event
+    var latlng = map.getCenter();
+    console.log(latlng);
+    prompt("Copy to clipboard: Ctrl+C, Enter",
+        "center: ["+latlng.lat+", "+latlng.lng+"],\n"+
+        "zoom: "+map.getZoom()+"\n"
+    );
+});  
+
 </script>
 
 </body>
